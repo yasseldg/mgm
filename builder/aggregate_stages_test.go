@@ -1,9 +1,9 @@
 package builder_test
 
 import (
-	"github.com/kamva/mgm/v3/builder"
-	"github.com/kamva/mgm/v3/field"
-	"github.com/kamva/mgm/v3/operator"
+	"github.com/yasseldg/mgm/v3/builder"
+	"github.com/yasseldg/mgm/v3/field"
+	"github.com/yasseldg/mgm/v3/operator"
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
 	"testing"

@@ -3,8 +3,8 @@ package mgm
 import (
 	"context"
 
-	"github.com/kamva/mgm/v3/builder"
-	"github.com/kamva/mgm/v3/field"
+	"github.com/yasseldg/mgm/v3/builder"
+	"github.com/yasseldg/mgm/v3/field"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

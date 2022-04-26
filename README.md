@@ -4,11 +4,11 @@
 
 
 <p align="center">
-  <a href="https://goreportcard.com/report/github.com/Kamva/mgm">
-    <img src="https://goreportcard.com/badge/github.com/Kamva/mgm">
+  <a href="https://goreportcard.com/report/github.com/yasseldg/mgm">
+    <img src="https://goreportcard.com/badge/github.com/yasseldg/mgm">
   </a>
-  <a href="https://godoc.org/github.com/Kamva/mgm">
-    <img src="https://godoc.org/github.com/Kamva/mgm?status.svg" alt="GoDoc">
+  <a href="https://godoc.org/github.com/yasseldg/mgm">
+    <img src="https://godoc.org/github.com/yasseldg/mgm?status.svg" alt="GoDoc">
   </a>
   <a href="https://travis-ci.com/Kamva/mgm">
     <img src="https://travis-ci.com/Kamva/mgm.svg?branch=master" alt="Build Status">
@@ -46,7 +46,7 @@ The Mongo ODM for Go
 ## Installation
 
 ```bash
-go get github.com/kamva/mgm/v3
+go get github.com/yasseldg/mgm/v3
 ```
 
 
@@ -54,7 +54,7 @@ go get github.com/kamva/mgm/v3
 To get started, import the `mgm` package and setup the default config:
 ```go
 import (
-   "github.com/kamva/mgm/v3"
+   "github.com/yasseldg/mgm/v3"
    "go.mongodb.org/mongo-driver/mongo/options"
 )
 
@@ -297,9 +297,9 @@ _ := mgm.Coll(&Book{}).SimpleAggregate(&result,
 Do aggregations using the mongo Aggregation method:
 ```go
 import (
-   "github.com/kamva/mgm/v3"
-   "github.com/kamva/mgm/v3/builder"
-   "github.com/kamva/mgm/v3/field"
+   "github.com/yasseldg/mgm/v3"
+   "github.com/yasseldg/mgm/v3/builder"
+   "github.com/yasseldg/mgm/v3/field"
    . "go.mongodb.org/mongo-driver/bson"
    "go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -316,10 +316,10 @@ cur, err := mgm.Coll(&Book{}).Aggregate(mgm.Ctx(), A{
 A more complex example and mixes with mongo raw pipelines:
 ```go
 import (
-   "github.com/kamva/mgm/v3"
-   "github.com/kamva/mgm/v3/builder"
-   "github.com/kamva/mgm/v3/field"
-   "github.com/kamva/mgm/v3/operator"
+   "github.com/yasseldg/mgm/v3"
+   "github.com/yasseldg/mgm/v3/builder"
+   "github.com/yasseldg/mgm/v3/field"
+   "github.com/yasseldg/mgm/v3/operator"
    . "go.mongodb.org/mongo-driver/bson"
    "go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -377,9 +377,9 @@ err := mgm.Transaction(func(session mongo.Session, sc mongo.SessionContext) erro
 Example:
  ```go
 import (
-   "github.com/kamva/mgm/v3"
-   f "github.com/kamva/mgm/v3/field"
-   o "github.com/kamva/mgm/v3/operator"
+   "github.com/yasseldg/mgm/v3"
+   f "github.com/yasseldg/mgm/v3/field"
+   o "github.com/yasseldg/mgm/v3/operator"
    "go.mongodb.org/mongo-driver/bson"
 )
 
@@ -397,16 +397,16 @@ _, _ = mgm.Coll(&Book{}).Aggregate(mgm.Ctx(), bson.A{
  ```
  
 ## Bugs / Feature request
-New features can be requested and bugs can be reported on [Github issue tracker](https://github.com/Kamva/mgm/issues).
+New features can be requested and bugs can be reported on [Github issue tracker](https://github.com/yasseldg/mgm/issues).
 
 ## Communicate With Us
 
 * Create new topic at [mongo-go-models Google Group](https://groups.google.com/forum/#!forum/mongo-go-models)  
-* Ask your question or request new feature by creating an issue at [Github issue tracker](https://github.com/Kamva/mgm/issues)  
+* Ask your question or request new feature by creating an issue at [Github issue tracker](https://github.com/yasseldg/mgm/issues)  
 
 ## Contributing 
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/kamva/mgm)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/yasseldg/mgm)
 
 1. Fork the repository
 1. Clone your fork (`git clone https://github.com/<your_username>/mgm && cd mgm`)
@@ -418,4 +418,4 @@ New features can be requested and bugs can be reported on [Github issue tracker]
 
 ## License
 
-Mongo Go Models is released under the [Apache License](https://github.com/Kamva/mgm/blob/master/LICENSE)
+Mongo Go Models is released under the [Apache License](https://github.com/yasseldg/mgm/blob/master/LICENSE)

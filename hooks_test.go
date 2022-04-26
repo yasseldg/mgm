@@ -3,8 +3,8 @@ package mgm_test
 import (
 	"context"
 	"errors"
-	"github.com/kamva/mgm/v3"
-	"github.com/kamva/mgm/v3/internal/util"
+	"github.com/yasseldg/mgm/v3"
+	"github.com/yasseldg/mgm/v3/internal/util"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"

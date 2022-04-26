@@ -1,6 +1,6 @@
 package crud
 
-import "github.com/kamva/mgm/v3"
+import "github.com/yasseldg/mgm/v3"
 
 func crud() error {
 
