@@ -99,6 +99,16 @@ func (coll *Collection) SimpleFindWithCtx(ctx context.Context, results interface
 	return cur.All(ctx, results)
 }
 
+// SimpleCount count documents.
+func (coll *Collection) SimpleCount(filter interface{}, opts ...*options.CountOptions) (int64, error) {
+	return coll.SimpleCountWithCtx(ctx(), filter, opts...)
+}
+
+// SimpleCountWithCtx count documents using the specified context.
+func (coll *Collection) SimpleCountWithCtx(ctx context.Context, filter interface{}, opts ...*options.CountOptions) (int64, error) {
+	return coll.CountDocuments(ctx, filter, opts...)
+}
+
 //--------------------------------
 // Aggregation methods
 //--------------------------------
