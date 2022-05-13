@@ -2,6 +2,7 @@ package mgm
 
 import (
 	"context"
+
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -25,6 +26,10 @@ type CreatedHook interface {
 // CreatedHookWithCtx is called after a model has been created
 type CreatedHookWithCtx interface {
 	Created(context.Context) error
+}
+
+type UpdatingStatesHook interface {
+	UpdatingStates() error
 }
 
 // UpdatingHook is called before updating a model
@@ -105,6 +110,12 @@ func callToBeforeCreateHooks(ctx context.Context, model Model) error {
 		}
 	}
 
+	if hook, ok := model.(UpdatingStatesHook); ok {
+		if err := hook.UpdatingStates(); err != nil {
+			return err
+		}
+	}
+
 	if hook, ok := model.(SavingHookWithCtx); ok {
 		if err := hook.Saving(ctx); err != nil {
 			return err
@@ -125,6 +136,12 @@ func callToBeforeUpdateHooks(ctx context.Context, model Model) error {
 		}
 	} else if hook, ok := model.(UpdatingHook); ok {
 		if err := hook.Updating(); err != nil {
+			return err
+		}
+	}
+
+	if hook, ok := model.(UpdatingStatesHook); ok {
+		if err := hook.UpdatingStates(); err != nil {
 			return err
 		}
 	}
