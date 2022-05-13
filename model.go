@@ -32,17 +32,6 @@ type DefaultModel struct {
 	DateFields `bson:",inline"`
 }
 
-// State with time
-type StateField struct {
-	State  string    `bson:"st" json:"st"`
-	UnixTs time.Time `bson:"ts" json:"ts"`
-}
-
-// StateField list
-type StateFields struct {
-	States []StateField
-}
-
 // DefaultModel struct contains a model's default fields.
 type DefaultModelState struct {
 	DefaultModel `bson:",inline"`
@@ -59,4 +48,9 @@ func (model *DefaultModel) Creating() error {
 // TODO: get context as param the next version(4).
 func (model *DefaultModel) Saving() error {
 	return model.DateFields.Saving()
+}
+
+// UpdatingStates function calls the inner fields' defined hooks
+func (model *DefaultModelState) UpdatingStates() error {
+	return model.StateFields.UpdatingStates()
 }
