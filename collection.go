@@ -173,3 +173,18 @@ func (coll *Collection) SimpleAggregateCursorWithCtx(ctx context.Context, stages
 
 	return coll.Aggregate(ctx, pipeline, nil)
 }
+
+// SimpleSum
+// Note: use the "total" field as $sum acumulator
+// matchStage := bson.D{{"$match", bson.D{{"st", "win"}}}}
+// groupStage := bson.D{{"$group", bson.D{{"_id", ""}, {"total", bson.D{{"$sum", "$tp"}}}}}}
+func (coll *Collection) SimpleSum(stages ...interface{}) (float64, error) {
+
+	var result []bson.M
+
+	err := coll.SimpleAggregate(&result, stages...)
+	if err == nil {
+		return result[0]["total"].(float64), nil
+	}
+	return 0.0, err
+}
