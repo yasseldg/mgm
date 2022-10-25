@@ -184,7 +184,10 @@ func (coll *Collection) SimpleSum(stages ...interface{}) (float64, error) {
 
 	err := coll.SimpleAggregate(&result, stages...)
 	if err == nil {
-		return result[0]["total"].(float64), nil
+		if len(result) > 0 {
+			return result[0]["total"].(float64), nil
+		}
 	}
 	return 0.0, err
 }
+
