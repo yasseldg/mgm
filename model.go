@@ -28,25 +28,36 @@ type Model interface {
 
 // DefaultModel struct contains a model's default fields.
 type DefaultModel struct {
-	IDField    `bson:",inline"`
-	DateFields `bson:",inline"`
+	IDField `bson:",inline"`
 }
 
-// DefaultModel struct contains a model's default fields.
+// DefaultModelDate struct contains a model's default fields.
+type DefaultModelDate struct {
+	DefaultModel `bson:",inline"`
+	DateFields   `bson:",inline"`
+}
+
+// DefaultModelState struct contains a model's default fields.
 type DefaultModelState struct {
 	DefaultModel `bson:",inline"`
 	StateFields  `bson:",inline"`
 }
 
+// DefaultModelDateState struct contains a model's default fields.
+type DefaultModelDateState struct {
+	DefaultModelDate `bson:",inline"`
+	StateFields      `bson:",inline"`
+}
+
 // Creating function calls the inner fields' defined hooks
 // TODO: get context as param in the next version (4).
-func (model *DefaultModel) Creating() error {
+func (model *DefaultModelDate) Creating() error {
 	return model.DateFields.Creating()
 }
 
 // Saving function calls the inner fields' defined hooks
 // TODO: get context as param the next version(4).
-func (model *DefaultModel) Saving() error {
+func (model *DefaultModelDate) Saving() error {
 	return model.DateFields.Saving()
 }
 
