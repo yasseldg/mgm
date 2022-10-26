@@ -25,6 +25,37 @@ func create(ctx context.Context, c *Collection, model Model, opts ...*options.In
 	return callToAfterCreateHooks(ctx, model)
 }
 
+func createMany(ctx context.Context, c *Collection, models []Model, opts ...*options.InsertManyOptions) error {
+
+	var docs []interface{}
+	for _, model := range models {
+		// Call to saving hook
+		if err := callToBeforeCreateHooks(ctx, model); err != nil {
+			return err
+		}
+		docs = append(docs, model)
+	}
+
+	res, err := c.InsertMany(ctx, docs, opts...)
+
+	if err != nil {
+		return err
+	}
+
+	if len(res.InsertedIDs) == len(models) {
+		for k, model := range models {
+			// Set new id
+			model.SetID(res.InsertedIDs[k])
+
+			if err := callToAfterCreateHooks(ctx, model); err != nil {
+				return err
+			}
+		}
+	}
+
+	return nil
+}
+
 func first(ctx context.Context, c *Collection, filter interface{}, model Model, opts ...*options.FindOneOptions) error {
 	return c.FindOne(ctx, filter, opts...).Decode(model)
 }
