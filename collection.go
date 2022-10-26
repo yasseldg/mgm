@@ -55,6 +55,16 @@ func (coll *Collection) CreateWithCtx(ctx context.Context, model Model, opts ...
 	return create(ctx, coll, model, opts...)
 }
 
+// CreateMany method inserts a new model into the database.
+func (coll *Collection) CreateMany(models []Model, opts ...*options.InsertManyOptions) error {
+	return coll.CreateManyWithCtx(ctx(), models, opts...)
+}
+
+// CreateManyWithCtx method inserts a new model into the database.
+func (coll *Collection) CreateManyWithCtx(ctx context.Context, models []Model, opts ...*options.InsertManyOptions) error {
+	return createMany(ctx, coll, models, opts...)
+}
+
 // Update function persists the changes made to a model to the database.
 // Calling this method also invokes the model's mgm updating, updated,
 // saving, and saved hooks.
