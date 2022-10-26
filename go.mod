@@ -1,4 +1,4 @@
-module github.com/yasseldg/mgm/v3
+module github.com/yasseldg/mgm/v4
 
 go 1.14
 
