@@ -46,7 +46,7 @@ The Mongo ODM for Go
 ## Installation
 
 ```bash
-go get github.com/yasseldg/mgm/v3
+go get github.com/yasseldg/mgm/v4
 ```
 
 ## Usage
@@ -55,7 +55,7 @@ To get started, import the `mgm` package and setup the default config:
 
 ```go
 import (
-   "github.com/yasseldg/mgm/v3"
+   "github.com/yasseldg/mgm/v4"
    "go.mongodb.org/mongo-driver/mongo/options"
 )
 
@@ -321,9 +321,9 @@ Do aggregations using the mongo Aggregation method:
 
 ```go
 import (
-   "github.com/yasseldg/mgm/v3"
-   "github.com/yasseldg/mgm/v3/builder"
-   "github.com/yasseldg/mgm/v3/field"
+   "github.com/yasseldg/mgm/v4"
+   "github.com/yasseldg/mgm/v4/builder"
+   "github.com/yasseldg/mgm/v4/field"
    . "go.mongodb.org/mongo-driver/bson"
    "go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -341,10 +341,10 @@ A more complex example and mixes with mongo raw pipelines:
 
 ```go
 import (
-   "github.com/yasseldg/mgm/v3"
-   "github.com/yasseldg/mgm/v3/builder"
-   "github.com/yasseldg/mgm/v3/field"
-   "github.com/yasseldg/mgm/v3/operator"
+   "github.com/yasseldg/mgm/v4"
+   "github.com/yasseldg/mgm/v4/builder"
+   "github.com/yasseldg/mgm/v4/field"
+   "github.com/yasseldg/mgm/v4/operator"
    . "go.mongodb.org/mongo-driver/bson"
    "go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -405,9 +405,9 @@ Example:
 
  ```go
 import (
-   "github.com/yasseldg/mgm/v3"
-   f "github.com/yasseldg/mgm/v3/field"
-   o "github.com/yasseldg/mgm/v3/operator"
+   "github.com/yasseldg/mgm/v4"
+   f "github.com/yasseldg/mgm/v4/field"
+   o "github.com/yasseldg/mgm/v4/operator"
    "go.mongodb.org/mongo-driver/bson"
 )
 

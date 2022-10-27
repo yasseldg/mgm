@@ -5,10 +5,10 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/yasseldg/mgm/v3"
-	"github.com/yasseldg/mgm/v3/builder"
-	"github.com/yasseldg/mgm/v3/internal/util"
-	"github.com/yasseldg/mgm/v3/operator"
+	"github.com/yasseldg/mgm/v4"
+	"github.com/yasseldg/mgm/v4/builder"
+	"github.com/yasseldg/mgm/v4/internal/util"
+	"github.com/yasseldg/mgm/v4/operator"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )

@@ -1,8 +1,8 @@
 package builder
 
 import (
-	f "github.com/yasseldg/mgm/v3/field"
-	o "github.com/yasseldg/mgm/v3/operator"
+	f "github.com/yasseldg/mgm/v4/field"
+	o "github.com/yasseldg/mgm/v4/operator"
 	"go.mongodb.org/mongo-driver/bson"
 )
 

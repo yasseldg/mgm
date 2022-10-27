@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/yasseldg/mgm/v3"
+	"github.com/yasseldg/mgm/v4"
 )
 
 func TestGetModelCollection(t *testing.T) {

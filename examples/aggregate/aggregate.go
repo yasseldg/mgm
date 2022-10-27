@@ -1,9 +1,9 @@
 package aggregate
 
 import (
-	"github.com/yasseldg/mgm/v3"
-	"github.com/yasseldg/mgm/v3/builder"
-	"github.com/yasseldg/mgm/v3/field"
+	"github.com/yasseldg/mgm/v4"
+	"github.com/yasseldg/mgm/v4/builder"
+	"github.com/yasseldg/mgm/v4/field"
 	"go.mongodb.org/mongo-driver/bson"
 )
 

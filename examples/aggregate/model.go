@@ -1,7 +1,7 @@
 package aggregate
 
 import (
-	"github.com/yasseldg/mgm/v3"
+	"github.com/yasseldg/mgm/v4"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 

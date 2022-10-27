@@ -2,8 +2,6 @@ module github.com/yasseldg/mgm/v4
 
 go 1.19
 
-replace github.com/kamva/mgm/v3 => github.com/yasseldg/mgm/v3 v3.4.1
-
 require (
 	github.com/jinzhu/inflection v1.0.0
 	github.com/stretchr/testify v1.6.1

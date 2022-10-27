@@ -1,7 +1,7 @@
 package crud
 
 import (
-	"github.com/yasseldg/mgm/v3"
+	"github.com/yasseldg/mgm/v4"
 )
 
 type book struct {

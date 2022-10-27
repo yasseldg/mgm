@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"github.com/yasseldg/mgm/v3/builder"
-	"github.com/yasseldg/mgm/v3/field"
-	"github.com/yasseldg/mgm/v3/operator"
+	"github.com/yasseldg/mgm/v4/builder"
+	"github.com/yasseldg/mgm/v4/field"
+	"github.com/yasseldg/mgm/v4/operator"
 	"go.mongodb.org/mongo-driver/bson"
 )
 

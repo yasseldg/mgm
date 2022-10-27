@@ -5,7 +5,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/yasseldg/mgm/v3/internal/util"
+	"github.com/yasseldg/mgm/v4/internal/util"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
