@@ -3,13 +3,14 @@ package mgm_test
 import (
 	"context"
 	"errors"
-	"github.com/yasseldg/mgm/v3"
-	"github.com/yasseldg/mgm/v3/internal/util"
+	"testing"
+
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
+	"github.com/yasseldg/mgm/v3"
+	"github.com/yasseldg/mgm/v3/internal/util"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"testing"
 )
 
 type Person struct {

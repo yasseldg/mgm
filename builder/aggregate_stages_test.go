@@ -1,12 +1,13 @@
 package builder_test
 
 import (
+	"testing"
+
+	"github.com/stretchr/testify/require"
 	"github.com/yasseldg/mgm/v3/builder"
 	"github.com/yasseldg/mgm/v3/field"
 	"github.com/yasseldg/mgm/v3/operator"
-	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
-	"testing"
 )
 
 type TestLookupData struct {

@@ -1,15 +1,16 @@
 package mgm_test
 
 import (
+	"testing"
+
+	"github.com/stretchr/testify/require"
 	"github.com/yasseldg/mgm/v3"
 	"github.com/yasseldg/mgm/v3/internal/util"
-	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"testing"
 )
 
-// Note: to run Transaction tests, the MongoDB daemon must run as replica set, not as a standalone daemon. 
+// Note: to run Transaction tests, the MongoDB daemon must run as replica set, not as a standalone daemon.
 // To convert it [see this](https://docs.mongodb.com/manual/tutorial/convert-standalone-to-replica-set/)
 func TestTransactionCommit(t *testing.T) {
 	setupDefConnection()

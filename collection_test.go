@@ -1,15 +1,16 @@
 package mgm_test
 
 import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/yasseldg/mgm/v3"
 	"github.com/yasseldg/mgm/v3/builder"
 	"github.com/yasseldg/mgm/v3/internal/util"
 	"github.com/yasseldg/mgm/v3/operator"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"testing"
 )
 
 func TestFindByIdWithInvalidId(t *testing.T) {

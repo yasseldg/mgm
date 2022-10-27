@@ -1,10 +1,11 @@
 package mgm_test
 
 import (
-	"github.com/yasseldg/mgm/v3/internal/util"
-	"github.com/stretchr/testify/require"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"testing"
+
+	"github.com/stretchr/testify/require"
+	"github.com/yasseldg/mgm/v3/internal/util"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func TestPrepareInvalidId(t *testing.T) {

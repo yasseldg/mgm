@@ -7,3 +7,5 @@
 # Coverage output files
 coverage.txt
 coverage.html
+
+.devcontainer

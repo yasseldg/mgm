@@ -1,4 +1,4 @@
 package mgm
 
 // Version of the package
-const Version = "3.3.0"
+const Version = "4.0.0"

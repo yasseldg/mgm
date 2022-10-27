@@ -2,7 +2,6 @@
 <img width="250" src="https://user-images.githubusercontent.com/22454054/71487214-759cb680-282f-11ea-9bcf-caa663b3e348.png" />
 </p>
 
-
 <p align="center">
   <a href="https://goreportcard.com/report/github.com/yasseldg/mgm">
     <img src="https://goreportcard.com/badge/github.com/yasseldg/mgm">
@@ -18,8 +17,7 @@
   </a>
 </p>
   
-
-# Mongo Go Models 
+# Mongo Go Models
 
 The Mongo ODM for Go
 
@@ -33,6 +31,7 @@ The Mongo ODM for Go
 - [License](#license)
 
 ## Features
+
 - Define your models and perform CRUD operations with hooks before/after each operation.
 - `mgm` makes Mongo search and aggregation super easy to do in Golang.
 - Just set up your configs once and get collections anywhere you need them.
@@ -40,6 +39,7 @@ The Mongo ODM for Go
 - `mgm` wraps the official Mongo Go Driver.
 
 ## Requirements
+
 - Go 1.10 or higher.
 - MongoDB 2.6 and higher.
 
@@ -49,9 +49,10 @@ The Mongo ODM for Go
 go get github.com/yasseldg/mgm/v3
 ```
 
-
 ## Usage
+
 To get started, import the `mgm` package and setup the default config:
+
 ```go
 import (
    "github.com/yasseldg/mgm/v3"
@@ -65,6 +66,7 @@ func init() {
 ```
 
 Define your model:
+
 ```go
 type Book struct {
    // DefaultModel adds _id, created_at and updated_at fields to the Model
@@ -82,6 +84,7 @@ func NewBook(name string, pages int) *Book {
 ```
 
 Insert new document:
+
 ```go
 book := NewBook("Pride and Prejudice", 345)
 
@@ -89,7 +92,8 @@ book := NewBook("Pride and Prejudice", 345)
 err := mgm.Coll(book).Create(book)
 ```
 
-Find one document 
+Find one document
+
 ```go
 // Get the document's collection
 book := &Book{}
@@ -106,6 +110,7 @@ _ = coll.First(bson.M{"pages":400}, book)
 ```
 
 Update a document
+
 ```go
 // Find your book
 book := findMyFavoriteBook()
@@ -116,12 +121,14 @@ err := mgm.Coll(book).Update(book)
 ```
 
 Delete a document
+
 ```go
 // Just find and delete your document
 err := mgm.Coll(book).Delete(book)
 ```
 
 Find and decode a result:
+
 ```go
 result := []Book{}
 
@@ -129,8 +136,10 @@ err := mgm.Coll(&Book{}).SimpleFind(&result, bson.M{"pages": bson.M{operator.Gt:
 ```
 
 ### A Model's Default Fields
+
 Each model by default (by using `DefaultModel` struct) has
 the following fields:  
+
 - `_id` : The document ID.
 
 - `created_at`: The creation date of a doc. When saving a new doc, this is automatically populated by the `Creating` hook.
@@ -139,6 +148,7 @@ the following fields:
 ### A Model's Hooks
 
 Each model has the following hooks:
+
 - `Creating`: Called when creating a new model.
 Signature : `Creating(context.Context) error`
 
@@ -163,14 +173,16 @@ Signature: `Deleting(context.Context) error`
 - `Deleted`: Called after a model is deleted.
 Signature: `Deleted(ctx context.Context, result *mongo.DeleteResult) error`
 
-**Notes about hooks**: 
+**Notes about hooks**:
+
 - Each model by default uses the `Creating` and `Saving` hooks, so if you want to define those hooks yourself, remember to invoke the `DefaultModel` hooks from your own hooks.
 - Collection methods that call these hooks:
-	- `Create` & `CreateWithCtx`
-	- `Update` & `UpdateWithCtx`
-	- `Delete` & `DeleteWithCtx`
+  - `Create` & `CreateWithCtx`
+  - `Update` & `UpdateWithCtx`
+  - `Delete` & `DeleteWithCtx`
 
 Example:
+
 ```go
 func (model *Book) Creating(ctx context.Context) error {
    // Call the DefaultModel Creating hook
@@ -186,8 +198,11 @@ func (model *Book) Creating(ctx context.Context) error {
    return nil
 }
 ```
+
 ### Configuration
+
 The `mgm` default configuration has a context timeout:
+
 ```go
 func init() {
    _ = mgm.SetDefaultConfig(&mgm.Config{CtxTimeout:12 * time.Second}, "mgm_lab", options.Client().ApplyURI("mongodb://root:12345@localhost:27017"))
@@ -202,11 +217,12 @@ coll.FindOne(ctx, bson.M{})
 
 // Or invoke Ctx() and use it directly
 coll.FindOne(mgm.Ctx(), bson.M{})
-``` 
-
+```
 
 ### Collections
+
 Get a model's collection:
+
 ```go
 coll := mgm.Coll(&Book{})
 
@@ -214,6 +230,7 @@ coll := mgm.Coll(&Book{})
 ```
 
 `mgm` automatically detects the name of a model's collection:
+
 ```go
 book := Book{}
 
@@ -223,6 +240,7 @@ fmt.Println(collName) // output: books
 ```
 
 You can also set a custom collection name for your model by implementing the `CollectionNameGetter` interface:
+
 ```go
 func (model *Book) CollectionName() string {
    return "my_books"
@@ -233,6 +251,7 @@ coll := mgm.Coll(&Book{})
 ```
 
 Get a collection by its name (without needing to define a model for it):
+
 ```go
 coll := mgm.CollectionByName("my_coll")
    
@@ -241,6 +260,7 @@ coll := mgm.CollectionByName("my_coll")
 
 Customize the model db by implementing the `CollectionGetter`
 interface:
+
 ```go
 func (model *Book) Collection() *mgm.Collection {
     // Get default connection client
@@ -273,11 +293,14 @@ func (model *Book) Collection() *mgm.Collection {
    return mgm.NewCollection(db, "my_collection")
 }
 ```
+
 ### Aggregation
-While we can use Mongo Go Driver Aggregate features, `mgm` also 
+
+While we can use Mongo Go Driver Aggregate features, `mgm` also
 provides simpler methods to perform aggregations:
 
 Run an aggregation and decode the result:
+
 ```go
 authorCollName := mgm.Coll(&Author{}).Name()
 result := []Book{}
@@ -287,14 +310,15 @@ _ := mgm.Coll(&Book{}).SimpleAggregate(&result, builder.Lookup(authorCollName, "
 
 // Multi stage (mix of mgm builders and raw stages)
 _ := mgm.Coll(&Book{}).SimpleAggregate(&result,
-		builder.Lookup(authorCollName, "auth_id", "_id", "author"),
-		M{operator.Project: M{"pages": 0}},
+  builder.Lookup(authorCollName, "auth_id", "_id", "author"),
+  M{operator.Project: M{"pages": 0}},
 )
 
 // Do something with result...
 ```
 
 Do aggregations using the mongo Aggregation method:
+
 ```go
 import (
    "github.com/yasseldg/mgm/v3"
@@ -314,6 +338,7 @@ cur, err := mgm.Coll(&Book{}).Aggregate(mgm.Ctx(), A{
 ```
 
 A more complex example and mixes with mongo raw pipelines:
+
 ```go
 import (
    "github.com/yasseldg/mgm/v3"
@@ -342,19 +367,20 @@ if err != nil {
 ### Transactions
 
 - To run a transaction on the default connection use the `mgm.Transaction()` function, e.g:
+
 ```go
 d := &Doc{Name: "Mehran", Age: 10}
 
 err := mgm.Transaction(func(session mongo.Session, sc mongo.SessionContext) error {
 
    // do not forget to pass the session's context to the collection methods.
-	err := mgm.Coll(d).CreateWithCtx(sc, d)
+ err := mgm.Coll(d).CreateWithCtx(sc, d)
 
-	if err != nil {
-		return err
-	}
+ if err != nil {
+  return err
+ }
 
-	return session.CommitTransaction(sc)
+ return session.CommitTransaction(sc)
 })
 ```
 
@@ -362,6 +388,7 @@ err := mgm.Transaction(func(session mongo.Session, sc mongo.SessionContext) erro
 - To run a transaction on another connection, use the `mgm.TransactionWithClient()` method.
 
 -----------------
+
 ## Other Mongo Go Models Packages
 
 **We implemented these packages to simplify queries and aggregations in mongo**
@@ -372,9 +399,10 @@ err := mgm.Transaction(func(session mongo.Session, sc mongo.SessionContext) erro
 (e.g `Eq  = "$eq"` , `Gt  = "$gt"`)  
 
 `field` : contains mongo fields used in aggregations and ... as predefined variable.
-(e.g `LocalField = "localField"`, `ForeignField = "foreignField"`) 
- 
+(e.g `LocalField = "localField"`, `ForeignField = "foreignField"`)
+
 Example:
+
  ```go
 import (
    "github.com/yasseldg/mgm/v3"
@@ -395,16 +423,17 @@ _, _ = mgm.Coll(&Book{}).Aggregate(mgm.Ctx(), bson.A{
     bson.M{o.Project: bson.M{f.Id: 0}},
 })
  ```
- 
+
 ## Bugs / Feature request
+
 New features can be requested and bugs can be reported on [Github issue tracker](https://github.com/yasseldg/mgm/issues).
 
 ## Communicate With Us
 
-* Create new topic at [mongo-go-models Google Group](https://groups.google.com/forum/#!forum/mongo-go-models)  
-* Ask your question or request new feature by creating an issue at [Github issue tracker](https://github.com/yasseldg/mgm/issues)  
+- Create new topic at [mongo-go-models Google Group](https://groups.google.com/forum/#!forum/mongo-go-models)  
+- Ask your question or request new feature by creating an issue at [Github issue tracker](https://github.com/yasseldg/mgm/issues)  
 
-## Contributing 
+## Contributing
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/yasseldg/mgm)
 

@@ -3,10 +3,11 @@ package mgm
 import (
 	"context"
 	"errors"
+	"time"
+
 	"github.com/yasseldg/mgm/v3/internal/util"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"time"
 )
 
 var config *Config
@@ -97,7 +98,7 @@ func DefaultConfigs() (*Config, *mongo.Client, *mongo.Database, error) {
 	return config, client, db, nil
 }
 
-// defaultConf are the default configuration values when none are provided 
+// defaultConf are the default configuration values when none are provided
 // to the `SetDefaultConfig` method.
 func defaultConf() *Config {
 	return &Config{CtxTimeout: 10 * time.Second}

@@ -200,4 +200,3 @@ func (coll *Collection) SimpleSum(stages ...interface{}) (float64, error) {
 	}
 	return 0.0, err
 }
-
