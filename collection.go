@@ -83,7 +83,7 @@ func (coll *Collection) UpdateWithCtx(ctx context.Context, model Model, opts ...
 // To perform additional operations when deleting a model
 // you should use hooks rather than overriding this method.
 func (coll *Collection) Delete(model Model) error {
-	return del(ctx(), coll, model)
+	return coll.DeleteWithCtx(ctx(), model)
 }
 
 // DeleteWithCtx method deletes a model (doc) from a collection using the specified context.
@@ -91,6 +91,20 @@ func (coll *Collection) Delete(model Model) error {
 // you should use hooks rather than overriding this method.
 func (coll *Collection) DeleteWithCtx(ctx context.Context, model Model) error {
 	return del(ctx, coll, model)
+}
+
+// DeleteMany method deletemanys a model (doc) from a collection.
+// To perform additional operations when deleting a model
+// you should use hooks rather than overriding this method.
+func (coll *Collection) DelMany(c *Collection, models []Model, filter interface{}, opts ...*options.DeleteOptions) error {
+	return coll.DelManyWithCtx(ctx(), coll, models, filter, opts...)
+}
+
+// DeleteManyWithCtx method deletemanys a model (doc) from a collection using the specified context.
+// To perform additional operations when deleting a model
+// you should use hooks rather than overriding this method.
+func (coll *Collection) DelManyWithCtx(ctx context.Context, c *Collection, models []Model, filter interface{}, opts ...*options.DeleteOptions) error {
+	return delMany(ctx, coll, models, filter, opts...)
 }
 
 // SimpleFind finds, decodes and returns the results.

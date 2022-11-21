@@ -87,3 +87,29 @@ func del(ctx context.Context, c *Collection, model Model) error {
 
 	return callToAfterDeleteHooks(ctx, res, model)
 }
+
+func delMany(ctx context.Context, c *Collection, models []Model, filter interface{}, opts ...*options.DeleteOptions) error {
+
+	for _, model := range models {
+		// Call to saving hook
+		if err := callToBeforeDeleteHooks(ctx, model); err != nil {
+			return err
+		}
+	}
+
+	res, err := c.DeleteMany(ctx, filter, opts...)
+
+	if err != nil {
+		return err
+	}
+
+	if res.DeletedCount == int64(len(models)) {
+		for _, model := range models {
+			if err := callToAfterDeleteHooks(ctx, res, model); err != nil {
+				return err
+			}
+		}
+	}
+
+	return nil
+}
