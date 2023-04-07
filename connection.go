@@ -65,7 +65,7 @@ func ResetDefaultConfig() {
 }
 
 // SetDefaultConfig initializes the client and database using the specified configuration values, or default.
-func SetDefaultConfig(conf *Config, dbName string, opts ...*options.ClientOptions) (err error) {
+func SetDefaultConfig(conf *Config) {
 
 	// Use the predefined configuration values as default if the user
 	// does not provide any.
@@ -74,6 +74,11 @@ func SetDefaultConfig(conf *Config, dbName string, opts ...*options.ClientOption
 	}
 
 	config = conf
+}
+
+func SetTestDefaultConfig(conf *Config, dbName string, opts ...*options.ClientOptions) (err error) {
+
+	SetDefaultConfig(conf)
 
 	if client, err = NewClient(opts...); err != nil {
 		return err

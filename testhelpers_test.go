@@ -11,7 +11,7 @@ import (
 
 func setupDefConnection() {
 	util.PanicErr(
-		mgm.SetDefaultConfig(nil, "models", options.Client().ApplyURI("mongodb://root:12345@localhost:27017")),
+		mgm.SetTestDefaultConfig(nil, "models", options.Client().ApplyURI("mongodb://root:12345@localhost:27017")),
 	)
 }
 

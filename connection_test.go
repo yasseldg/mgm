@@ -11,13 +11,13 @@ import (
 )
 
 func TestSetupDefaultConnection(t *testing.T) {
-	err := mgm.SetDefaultConfig(nil, "models", options.Client().ApplyURI("mongodb://root:12345@localhost:27017"))
+	err := mgm.SetTestDefaultConfig(nil, "models", options.Client().ApplyURI("mongodb://root:12345@localhost:27017"))
 
 	require.Nil(t, err)
 }
 
 func TestSetupWrongConnection(t *testing.T) {
-	err := mgm.SetDefaultConfig(nil, "models", options.Client().ApplyURI("wrong://wrong:wrong@localhost:27017"))
+	err := mgm.SetTestDefaultConfig(nil, "models", options.Client().ApplyURI("wrong://wrong:wrong@localhost:27017"))
 
 	require.NotNil(t, err)
 }
