@@ -93,3 +93,7 @@ func (f *StateFields) UpdatingStates() error {
 
 	return nil
 }
+
+func (f *StateFields) SetState(state string) {
+	f.State = state
+}

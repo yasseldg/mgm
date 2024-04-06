@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/yasseldg/mgm/v4/internal/util"
+
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -38,12 +39,8 @@ func ctx() context.Context {
 
 // NewClient returns a new mongodb client.
 func NewClient(opts ...*options.ClientOptions) (*mongo.Client, error) {
-	client, err := mongo.NewClient(opts...)
+	client, err := mongo.Connect(Ctx(), opts...)
 	if err != nil {
-		return nil, err
-	}
-
-	if err = client.Connect(Ctx()); err != nil {
 		return nil, err
 	}
 
