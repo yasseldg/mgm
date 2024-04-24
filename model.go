@@ -14,16 +14,48 @@ type CollectionNameGetter interface {
 	CollectionName() string
 }
 
-// Model interface contains base methods that must be implemented by
-// each model. If you're using the `DefaultModel` struct in your model,
-// you don't need to implement any of these methods.
-type Model interface {
+type ID interface {
 	// PrepareID converts the id value if needed, then
 	// returns it (e.g convert string to objectId).
 	PrepareID(id interface{}) (interface{}, error)
 
 	GetID() interface{}
 	SetID(id interface{})
+
+	StringID() string
+}
+
+// Model interface contains base methods that must be implemented by
+// each model. If you're using the `DefaultModel` struct in your model,
+// you don't need to implement any of these methods.
+type Model interface {
+	ID
+}
+
+type Date interface {
+	Creating() error
+	Saving() error
+}
+
+type State interface {
+	SetState(state string)
+	UpdatingStates() error
+}
+
+type ModelDate interface {
+	Model
+	Date
+}
+
+type ModelState interface {
+	Model
+	State
+}
+
+type ModelDateState interface {
+	Model
+	Date
+	State
 }
 
 // DefaultModel struct contains a model's default fields.
@@ -45,8 +77,9 @@ type DefaultModelState struct {
 
 // DefaultModelDateState struct contains a model's default fields.
 type DefaultModelDateState struct {
-	DefaultModelDate `bson:",inline"`
-	StateFields      `bson:",inline"`
+	DefaultModel `bson:",inline"`
+	DateFields   `bson:",inline"`
+	StateFields  `bson:",inline"`
 }
 
 // Creating function calls the inner fields' defined hooks

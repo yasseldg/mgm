@@ -11,25 +11,6 @@ type IDField struct {
 	ID primitive.ObjectID `json:"id" bson:"_id,omitempty"`
 }
 
-// DateFields struct contains the `c_at` and `u_at`
-// fields that autofill when inserting or updating a model.
-type DateFields struct {
-	CreatedAt time.Time `json:"c_at" bson:"c_at"`
-	UpdatedAt time.Time `json:"u_at" bson:"u_at"`
-}
-
-// State with time
-type StateField struct {
-	State  string    `bson:"st" json:"st"`
-	UnixTs time.Time `bson:"ts" json:"ts"`
-}
-
-// StateField list
-type StateFields struct {
-	State  string       `bson:"st" json:"st"`
-	States []StateField `bson:"ss" json:"ss"`
-}
-
 // PrepareID method prepares the ID value to be used for filtering
 // e.g convert hex-string ID value to bson.ObjectId
 func (f *IDField) PrepareID(id interface{}) (interface{}, error) {
@@ -46,9 +27,20 @@ func (f *IDField) GetID() interface{} {
 	return f.ID
 }
 
+func (f *IDField) StringID() string {
+	return f.ID.Hex()
+}
+
 // SetID sets the value of a model's ID field.
 func (f *IDField) SetID(id interface{}) {
 	f.ID = id.(primitive.ObjectID)
+}
+
+// DateFields struct contains the `c_at` and `u_at`
+// fields that autofill when inserting or updating a model.
+type DateFields struct {
+	CreatedAt time.Time `json:"c_at" bson:"c_at"`
+	UpdatedAt time.Time `json:"u_at" bson:"u_at"`
 }
 
 //--------------------------------
@@ -69,6 +61,18 @@ func (f *DateFields) Creating() error {
 func (f *DateFields) Saving() error {
 	f.UpdatedAt = time.Now().UTC()
 	return nil
+}
+
+// State with time
+type StateField struct {
+	State  string    `bson:"st" json:"st"`
+	UnixTs time.Time `bson:"ts" json:"ts"`
+}
+
+// StateField list
+type StateFields struct {
+	State  string       `bson:"st" json:"st"`
+	States []StateField `bson:"ss" json:"ss"`
 }
 
 //--------------------------------
