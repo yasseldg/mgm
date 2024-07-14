@@ -38,6 +38,7 @@ type Date interface {
 }
 
 type State interface {
+	GetState() string
 	SetState(state string)
 	UpdatingStates() error
 }
@@ -80,21 +81,4 @@ type DefaultModelDateState struct {
 	DefaultModel `bson:",inline"`
 	DateFields   `bson:",inline"`
 	StateFields  `bson:",inline"`
-}
-
-// Creating function calls the inner fields' defined hooks
-// TODO: get context as param in the next version (4).
-func (model *DefaultModelDate) Creating() error {
-	return model.DateFields.Creating()
-}
-
-// Saving function calls the inner fields' defined hooks
-// TODO: get context as param the next version(4).
-func (model *DefaultModelDate) Saving() error {
-	return model.DateFields.Saving()
-}
-
-// UpdatingStates function calls the inner fields' defined hooks
-func (model *DefaultModelState) UpdatingStates() error {
-	return model.StateFields.UpdatingStates()
 }

@@ -101,3 +101,7 @@ func (f *StateFields) UpdatingStates() error {
 func (f *StateFields) SetState(state string) {
 	f.State = state
 }
+
+func (f *StateFields) GetState() string {
+	return f.State
+}
