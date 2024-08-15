@@ -79,6 +79,10 @@ func (coll *Collection) UpdateWithCtx(ctx context.Context, model Model, opts ...
 	return update(ctx, coll, model, opts...)
 }
 
+func (coll *Collection) UpsertWithCtx(ctx context.Context, filter interface{}, model Model, opts ...*options.UpdateOptions) error {
+	return upsert(ctx, coll, filter, model, opts...)
+}
+
 // Delete method deletes a model (doc) from a collection.
 // To perform additional operations when deleting a model
 // you should use hooks rather than overriding this method.
