@@ -76,6 +76,21 @@ func update(ctx context.Context, c *Collection, model Model, opts ...*options.Up
 	return callToAfterUpdateHooks(ctx, res, model)
 }
 
+func upsert(ctx context.Context, c *Collection, filter interface{}, model Model, opts ...*options.UpdateOptions) error {
+	// Call to saving hook
+	if err := callToBeforeUpdateHooks(ctx, model); err != nil {
+		return err
+	}
+
+	res, err := c.UpdateOne(ctx, filter, bson.M{"$set": model}, opts...)
+
+	if err != nil {
+		return err
+	}
+
+	return callToAfterUpdateHooks(ctx, res, model)
+}
+
 func del(ctx context.Context, c *Collection, model Model) error {
 	if err := callToBeforeDeleteHooks(ctx, model); err != nil {
 		return err
