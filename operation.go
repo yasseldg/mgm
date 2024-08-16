@@ -91,6 +91,15 @@ func upsert(ctx context.Context, c *Collection, filter interface{}, model Model,
 	return callToAfterUpdateHooks(ctx, res, model)
 }
 
+func upsertDoc(ctx context.Context, c *Collection, filter, doc interface{}, opts ...*options.UpdateOptions) error {
+
+	_, err := c.UpdateOne(ctx, filter, bson.M{"$set": doc}, opts...)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func del(ctx context.Context, c *Collection, model Model) error {
 	if err := callToBeforeDeleteHooks(ctx, model); err != nil {
 		return err
