@@ -65,8 +65,8 @@ func (f *DateFields) Saving() error {
 
 // State with time
 type StateField struct {
-	State  string    `bson:"st" json:"st"`
-	UnixTs time.Time `bson:"ts" json:"ts"`
+	State   string    `bson:"st" json:"st"`
+	Updated time.Time `bson:"ts" json:"ts"`
 }
 
 // StateField list
@@ -92,7 +92,7 @@ func (f *StateFields) UpdatingStates() error {
 	}
 
 	if (len(f.States) == 0) || (f.State != f.States[len(f.States)-1].State) {
-		f.States = append(f.States, StateField{State: f.State, UnixTs: time.Now().UTC()})
+		f.States = append(f.States, StateField{State: f.State, Updated: time.Now().UTC()})
 	}
 
 	return nil
@@ -104,4 +104,12 @@ func (f *StateFields) SetState(state string) {
 
 func (f *StateFields) GetState() string {
 	return f.State
+}
+
+func (f *StateFields) LastState() StateField {
+	if len(f.States) == 0 {
+		return StateField{}
+	}
+
+	return f.States[len(f.States)-1]
 }
